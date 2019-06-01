@@ -31,3 +31,13 @@ CREATE TABLE `quiz`.`questao` (
     REFERENCES `quiz`.`resposta` (`cd_resposta`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+    
+ALTER TABLE `quiz`.`questao` 
+ADD COLUMN `cd_jogador` BIGINT(19) NOT NULL AFTER `cd_resposta`,
+ADD INDEX `fk_jogador_idx` (`cd_jogador` ASC);
+ALTER TABLE `quiz`.`questao` 
+ADD CONSTRAINT `fk_jogador`
+  FOREIGN KEY (`cd_jogador`)
+  REFERENCES `quiz`.`jogador` (`cd_jogador`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
