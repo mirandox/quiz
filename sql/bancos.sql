@@ -41,3 +41,11 @@ ADD CONSTRAINT `fk_jogador`
   REFERENCES `quiz`.`jogador` (`cd_jogador`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+
+ALTER TABLE `quiz`.`resposta` 
+ADD CONSTRAINT `fk_resposta_pergunta`
+  FOREIGN KEY (`nr_pergunta`)
+  REFERENCES `quiz`.`pergunta` (`cd_pergunta`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
