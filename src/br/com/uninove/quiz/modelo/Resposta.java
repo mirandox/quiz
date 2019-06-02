@@ -4,7 +4,8 @@ public class Resposta {
 
 	private int codigoResposta;
 	private String descricaoResposta;
-	private boolean corretaResposta;
+	private String corretaResposta;
+	private int numeroPergunta;
 	
 	public int getCodigoResposta() {
 		return codigoResposta;
@@ -22,11 +23,19 @@ public class Resposta {
 		this.descricaoResposta = descricaoResposta;
 	}
 	
-	public boolean isCorretaResposta() {
+	public String getCorretaResposta() {
 		return corretaResposta;
 	}
 	
-	public void setCorretaResposta(boolean corretaResposta) {
+	public void setCorretaResposta(String corretaResposta) {
 		this.corretaResposta = corretaResposta;
+	}
+
+	public int getNumeroPergunta() {
+		return numeroPergunta;
+	}
+
+	public void setNumeroPergunta(int numeroPergunta) {
+		this.numeroPergunta = numeroPergunta;
 	}
 }

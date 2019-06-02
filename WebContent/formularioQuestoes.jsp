@@ -1,7 +1,10 @@
+<%@page import="br.com.uninove.quiz.modelo.Jogador"%>
+<%@page import="br.com.uninove.quiz.servlet.JogadorController"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import="java.util.List,br.com.uninove.quiz.servlet.JogadorController"%>    
+ 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>   
     
@@ -19,21 +22,31 @@
 </head>
 <body>
 
-	<c:forEach items="${ jogadores }" var="jogador">
-		<label> ${ jogador.nomeJogador }  </label>
-	</c:forEach>
+	<label>Bem vindo, 
+        <% 
+            Jogador jogador = new Jogador();
+            out.print(request.getAttribute("jogador"));
+        %>
+    </label>
 
 	<form>
-			<fieldset id="group1">
-				<label> A </label>
-				<div class="custom-control custom-radio">
-					 <input type="radio" id="customRadio1" name="group1" class="custom-control-input">
-					 <label class="custom-control-label" for="customRadio1"> A </label>
-				</div>
-			</fieldset>
+		<fieldset id="group1">
+			<c:forEach var="pergunta" items="${ perguntas }">
+					<label> 
+						<c:out value="${ pergunta.descricaoPergunta }"/>
+					</label>
+					
+						<div class="custom-control custom-radio">
+						<c:forEach var="resposta" items="${ respostas }">
+						 	<input type="radio" id="customRadio1" name="group1" class="custom-control-input">
+						 	<label class="custom-control-label" for="customRadio1"> 
+						 		<c:out value="${ resposta.descricaoResposta }"/>
+						 	</label>
+						 	</c:forEach>
+						</div>
+					
+			</c:forEach>
+		</fieldset>
 	</form>
-
-
-
 </body>
 </html>

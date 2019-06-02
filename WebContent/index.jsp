@@ -14,7 +14,7 @@
 	<body class="container">
 		<br/>
 		<div class="center-form">
-			<form action="/WEB-INF/novoJogador" method="POST">
+			<form action="/quiz/novoJogador" method="POST">
 				<div class="form-group">
 					<label for="inputNome">Nome do jogador</label>
 					<input type="text" name="nome" class="form-control" placeholder="Digite um nome"/>
