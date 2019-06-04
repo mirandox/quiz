@@ -1,12 +1,7 @@
 <%@page import="br.com.uninove.quiz.modelo.Jogador"%>
 <%@page import="br.com.uninove.quiz.servlet.JogadorController"%>
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
- 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>   
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
     
 <!DOCTYPE html>
 <html>
@@ -22,31 +17,30 @@
 </head>
 <body>
 
-	<label>Bem vindo, 
-        <% 
-            Jogador jogador = new Jogador();
-            out.print(request.getAttribute("jogador"));
-        %>
+	<label>
+		Bem vindo, <c:out value="${ jogador.nomeJogador }"/>!
     </label>
 
-	<form>
-		<fieldset id="group1">
-			<c:forEach var="pergunta" items="${ perguntas }">
-					<label> 
-						<c:out value="${ pergunta.descricaoPergunta }"/>
-					</label>
-					
+	<form action="/quiz/salvaQuestao" method="POST">
+		<c:forEach var="pergunta" items="${ perguntas }">
+			<fieldset id="${ pergunta.codigoPergunta }">
+				<label> 
+					<c:out value="${ pergunta.descricaoPergunta }"/>
+				</label>
+				<c:forEach var="resposta" items="${ respostas }">
+					<c:if test = "${ pergunta.codigoPergunta == resposta.numeroPergunta }">
 						<div class="custom-control custom-radio">
-						<c:forEach var="resposta" items="${ respostas }">
-						 	<input type="radio" id="customRadio1" name="group1" class="custom-control-input">
-						 	<label class="custom-control-label" for="customRadio1"> 
+						 	<input type="radio" id="${ resposta.codigoResposta }" name="${ pergunta.codigoPergunta }" class="custom-control-input" value="${ resposta.codigoResposta }">
+						 	<label class="custom-control-label" for="${ resposta.codigoResposta }"> 
 						 		<c:out value="${ resposta.descricaoResposta }"/>
 						 	</label>
-						 	</c:forEach>
-						</div>
-					
-			</c:forEach>
-		</fieldset>
+					 	</div>
+				 	</c:if>
+			 	</c:forEach>
+		 	</fieldset>
+		</c:forEach>
+		
+		<button type="submit" class="btn btn-primary">Enviar</button>
 	</form>
 </body>
 </html>

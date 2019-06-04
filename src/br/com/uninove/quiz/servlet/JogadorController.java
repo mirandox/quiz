@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.uninove.quiz.modelo.Banco;
+import br.com.uninove.quiz.banco.Banco;
 import br.com.uninove.quiz.modelo.Jogador;
 import br.com.uninove.quiz.modelo.Pergunta;
 import br.com.uninove.quiz.modelo.Resposta;
@@ -45,7 +45,7 @@ public class JogadorController extends HttpServlet {
 		
 		banco.desconectar();
 		
-		request.setAttribute("jogador", jogador.getNomeJogador());
+		request.setAttribute("jogador", jogador);
 		request.setAttribute("perguntas", perguntas);
 		request.setAttribute("respostas", respostas);
 		

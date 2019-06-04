@@ -1,4 +1,4 @@
-package br.com.uninove.quiz.modelo;
+package br.com.uninove.quiz.banco;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import br.com.uninove.quiz.modelo.Jogador;
+import br.com.uninove.quiz.modelo.Pergunta;
+import br.com.uninove.quiz.modelo.Questao;
+import br.com.uninove.quiz.modelo.Resposta;
 
 public class Banco {
 
@@ -53,37 +58,6 @@ public class Banco {
 			e.printStackTrace();
 			System.out.println("Falha ao inserir jogador!");
 		}
-	}
-	
-	public List<Questao> getQuestoes() {
-		
-		List<Questao> questoes = new ArrayList<>();
-		
-		try {
-			String comando = "SELECT * FROM questao WHERE cd_pergunta = 1;";
-			
-			statement = connection.prepareStatement(comando);
-			
-			resultSet = statement.executeQuery();
-			
-			while(resultSet.next()) {
-				Questao questao = new Questao();
-				
-				questao.setCodigoQuestao(resultSet.getInt("cd_questao"));
-				questao.setCodigoPergunta(resultSet.getInt("cd_pergunta"));
-				questao.setDescricaoPergunta(resultSet.getString("ds_pergunta"));
-				questao.setCodigoResposta(resultSet.getInt("cd_resposta"));
-				questao.setDescricaoResposta(resultSet.getString("ds_resposta"));
-				questao.setTipoResposa(resultSet.getString("in_tipo_resposta"));
-				
-				questoes.add(questao);
-			}
-			System.out.println("Questões retornadas com sucesso!");
-		} catch (SQLException e) {
-			System.out.println("Falha ao buscar questões!");
-			e.printStackTrace();
-		} 
-		return questoes;
 	}
 	
 	public List<Pergunta> getPerguntas() {
@@ -140,5 +114,24 @@ public class Banco {
 			e.printStackTrace();
 		}
 		return respostas;
+	}
+
+	public void salvaQuestao(Questao questao) {
+		try {
+			String comando = "INSERT INTO questao (`cd_pergunta`, `cd_resposta`, `cd_jogador`)"
+					+ " VALUES (?, ?, ?)";
+			
+			statement = connection.prepareStatement(comando);
+			
+			statement.setInt(1, questao.getCodigoPergunta());
+			statement.setInt(2, questao.getCodigoResposta());
+			statement.setInt(3, questao.getCodigoJogador());
+			
+			statement.execute();
+			System.out.println("Questao cadastrada com sucesso!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Falha ao inserir questao!");
+		}
 	}
  }

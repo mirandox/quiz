@@ -4,10 +4,8 @@ public class Questao {
 	
 	private int codigoQuestao;
 	private int codigoPergunta;
-	private String descricaoPergunta;
 	private int codigoResposta;
-	private String descricaoResposta;
-	private String tipoResposa;
+	private int codigoJogador;
 	
 	public int getCodigoQuestao() {
 		return codigoQuestao;
@@ -25,14 +23,6 @@ public class Questao {
 		this.codigoPergunta = codigoPergunta;
 	}
 	
-	public String getDescricaoPergunta() {
-		return descricaoPergunta;
-	}
-	
-	public void setDescricaoPergunta(String descricaoPergunta) {
-		this.descricaoPergunta = descricaoPergunta;
-	}
-	
 	public int getCodigoResposta() {
 		return codigoResposta;
 	}
@@ -41,26 +31,11 @@ public class Questao {
 		this.codigoResposta = codigoResposta;
 	}
 	
-	public String getDescricaoResposta() {
-		return descricaoResposta;
+	public int getCodigoJogador() {
+		return codigoJogador;
 	}
 	
-	public void setDescricaoResposta(String descricaoResposta) {
-		this.descricaoResposta = descricaoResposta;
-	}
-	
-	public String getTipoResposa() {
-		return tipoResposa;
-	}
-	
-	public void setTipoResposa(String tipoResposa) {
-		this.tipoResposa = tipoResposa;
-	}
-
-	@Override
-	public String toString() {
-		return "Questao [codigoQuestao=" + codigoQuestao + ", codigoPergunta=" + codigoPergunta + ", descricaoPergunta="
-				+ descricaoPergunta + ", codigoResposta=" + codigoResposta + ", descricaoResposta=" + descricaoResposta
-				+ ", tipoResposa=" + tipoResposa + "]";
+	public void setCodigoJogador(int codigoJogador) {
+		this.codigoJogador = codigoJogador;
 	}
 }
