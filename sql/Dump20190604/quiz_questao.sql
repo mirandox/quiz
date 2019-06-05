@@ -1,0 +1,59 @@
+-- MySQL dump 10.13  Distrib 5.7.26, for Linux (x86_64)
+--
+-- Host: 127.0.0.1    Database: quiz
+-- ------------------------------------------------------
+-- Server version	5.7.26
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `questao`
+--
+
+DROP TABLE IF EXISTS `questao`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `questao` (
+  `cd_questao` bigint(19) NOT NULL AUTO_INCREMENT,
+  `cd_pergunta` bigint(19) NOT NULL,
+  `cd_resposta` bigint(19) NOT NULL,
+  `cd_jogador` bigint(19) NOT NULL,
+  PRIMARY KEY (`cd_questao`),
+  KEY `fk_questao_pergunta_idx` (`cd_pergunta`),
+  KEY `fk_questao_resposta_idx` (`cd_resposta`),
+  KEY `fk_questao_jogador_idx` (`cd_jogador`),
+  CONSTRAINT `fk_questao_jogador` FOREIGN KEY (`cd_jogador`) REFERENCES `jogador` (`cd_jogador`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_questao_pergunta` FOREIGN KEY (`cd_pergunta`) REFERENCES `pergunta` (`cd_pergunta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_questao_resposta` FOREIGN KEY (`cd_resposta`) REFERENCES `resposta` (`cd_resposta`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=332 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `questao`
+--
+
+LOCK TABLES `questao` WRITE;
+/*!40000 ALTER TABLE `questao` DISABLE KEYS */;
+INSERT INTO `questao` VALUES (1,3,2,1),(62,1,3,97),(63,2,8,97),(64,3,14,97),(65,4,18,97),(66,5,24,97),(67,6,28,97),(68,7,33,97),(69,8,38,97),(70,9,41,97),(71,10,50,97),(82,1,3,99),(83,2,6,99),(84,3,13,99),(85,4,20,99),(86,5,21,99),(87,6,28,99),(88,7,33,99),(89,8,40,99),(90,9,41,99),(91,10,50,99),(92,1,4,100),(93,2,8,100),(94,3,13,100),(95,4,19,100),(96,5,25,100),(97,6,28,100),(98,7,31,100),(99,8,38,100),(100,9,45,100),(101,10,46,100),(102,1,3,101),(103,2,7,101),(104,3,12,101),(105,4,19,101),(106,5,23,101),(107,6,28,101),(108,7,33,101),(109,8,38,101),(110,9,43,101),(111,10,46,101),(292,1,2,132),(293,2,8,132),(294,3,14,132),(295,4,17,132),(296,5,24,132),(297,6,28,132),(298,7,35,132),(299,8,40,132),(300,9,44,132),(301,10,47,132),(302,1,2,133),(303,2,8,133),(304,3,11,133),(305,4,19,133),(306,5,21,133),(307,6,28,133),(308,7,33,133),(309,8,39,133),(310,9,43,133),(311,10,46,133),(312,1,2,133),(313,2,8,133),(314,3,11,133),(315,4,19,133),(316,5,21,133),(317,6,28,133),(318,7,33,133),(319,8,39,133),(320,9,43,133),(321,10,46,133),(322,1,2,134),(323,2,8,134),(324,3,13,134),(325,4,16,134),(326,5,25,134),(327,6,28,134),(328,7,32,134),(329,8,38,134),(330,9,44,134),(331,10,46,134);
+/*!40000 ALTER TABLE `questao` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-06-04 21:45:02
