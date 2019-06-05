@@ -11,6 +11,7 @@ import java.util.List;
 import br.com.uninove.quiz.modelo.Jogador;
 import br.com.uninove.quiz.modelo.Pergunta;
 import br.com.uninove.quiz.modelo.Questao;
+import br.com.uninove.quiz.modelo.Ranking;
 import br.com.uninove.quiz.modelo.Resposta;
 
 public class Banco {
@@ -133,5 +134,64 @@ public class Banco {
 			e.printStackTrace();
 			System.out.println("Falha ao inserir questao!");
 		}
+	}
+	
+	public int getCodigoLastJogador() {
+		
+		int codigoJogador = 0;
+		
+		try {
+			String comando = "SELECT * FROM jogador ORDER BY `cd_jogador` DESC LIMIT 1;";
+			
+			statement = connection.prepareStatement(comando);
+			
+			resultSet = statement.executeQuery();
+			
+			while(resultSet.next()) {
+				Jogador jogador = new Jogador();
+				jogador.setCodigoJogador(resultSet.getInt("cd_jogador"));
+				
+				codigoJogador = jogador.getCodigoJogador();
+			}
+			System.out.println("Último jogador retornado com sucesso!");
+		} catch(SQLException e) {
+			System.out.println("Não foi possível buscar o último jogador!");
+			e.printStackTrace();
+		}
+		return codigoJogador;
+	}
+	
+	public List<Ranking> getRanking() {
+		
+		List<Ranking> listaRanking = new ArrayList<>();
+		
+		try {
+			String comando = "SELECT COUNT(*) AS pontuacao, j.nm_jogador AS nome\n" + 
+							    "FROM questao AS q\n" + 
+								"	INNER JOIN resposta AS r\n" + 
+								"		ON r.cd_resposta = q.cd_resposta\n" + 
+								"	INNER JOIN jogador AS j\n" + 
+								"		ON j.cd_jogador = q.cd_jogador\n" + 
+								"WHERE r.in_tipo_resposta = 'VERDADEIRO'\n" + 
+								"GROUP BY q.cd_jogador "
+								+ "ORDER BY pontuacao DESC;";
+						
+			statement = connection.prepareStatement(comando);
+			
+			resultSet = statement.executeQuery();
+			
+			while(resultSet.next()) {
+				Ranking ranking = new Ranking();
+				ranking.setNomeJogador(resultSet.getString("nome"));
+				ranking.setPontuacao(resultSet.getInt("pontuacao"));
+				
+				listaRanking.add(ranking);
+			}
+			System.out.println("Ranking retornado com sucesso!");
+		} catch(SQLException e) {
+			System.out.println("Não foi possível buscar o ranking!");
+			e.printStackTrace();
+		}
+		return listaRanking;
 	}
  }

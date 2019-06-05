@@ -43,6 +43,10 @@ public class JogadorController extends HttpServlet {
 		List<Pergunta> perguntas = banco.getPerguntas();
 		List<Resposta> respostas = banco.getRespostas();
 		
+		int codigoJogador = banco.getCodigoLastJogador();
+		
+		jogador.setCodigoJogador(codigoJogador);
+		
 		banco.desconectar();
 		
 		request.setAttribute("jogador", jogador);

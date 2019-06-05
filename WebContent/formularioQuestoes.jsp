@@ -15,32 +15,38 @@
 			crossorigin="anonymous"
 		>
 </head>
-<body>
-
-	<label>
-		Bem vindo, <c:out value="${ jogador.nomeJogador }"/>!
-    </label>
-
+<body class="container">
+<br>
+	<h2 class="text-center">Bem vindo, <c:out value="${ jogador.nomeJogador }"/>!</h2>
+<br>
 	<form action="/quiz/salvaQuestao" method="POST">
-		<c:forEach var="pergunta" items="${ perguntas }">
-			<fieldset id="${ pergunta.codigoPergunta }">
-				<label> 
-					<c:out value="${ pergunta.descricaoPergunta }"/>
-				</label>
-				<c:forEach var="resposta" items="${ respostas }">
-					<c:if test = "${ pergunta.codigoPergunta == resposta.numeroPergunta }">
-						<div class="custom-control custom-radio">
-						 	<input type="radio" id="${ resposta.codigoResposta }" name="${ pergunta.codigoPergunta }" class="custom-control-input" value="${ resposta.codigoResposta }">
-						 	<label class="custom-control-label" for="${ resposta.codigoResposta }"> 
-						 		<c:out value="${ resposta.descricaoResposta }"/>
-						 	</label>
-					 	</div>
-				 	</c:if>
-			 	</c:forEach>
-		 	</fieldset>
-		</c:forEach>
+	<input value="${ jogador.codigoJogador }" name="jogador" style="display: none">
 		
-		<button type="submit" class="btn btn-primary">Enviar</button>
+			<c:forEach var="pergunta" items="${ perguntas }">
+			<div class="card" style="width: 69rem;">
+				<fieldset id="${ pergunta.codigoPergunta }">
+					<div class="card-header">
+						<label class="font-weight-bold"> 
+							<c:out value="${ pergunta.descricaoPergunta }"/>
+						</label>
+					</div>
+					<div class="list-group list-group-flush">
+						<c:forEach var="resposta" items="${ respostas }">
+							<c:if test = "${ pergunta.codigoPergunta == resposta.numeroPergunta }">
+								<div class="list-group-item custom-control custom-radio" style="padding-left: 40px">
+								 	<input type="radio" id="${ resposta.codigoResposta }" name="${ pergunta.codigoPergunta }" class="custom-control-input" value="${ resposta.codigoResposta }">
+								 	<label class="custom-control-label" for="${ resposta.codigoResposta }"> 
+								 		<c:out value="${ resposta.descricaoResposta }"/>
+								 	</label>
+							 	</div>
+						 	</c:if>
+					 	</c:forEach>
+				 	</div>
+			 	</fieldset>
+			 	</div>
+			 	<br>
+			</c:forEach>
+		<button type="submit" class="btn btn-primary btn-lg btn-block">Enviar</button><br><br>
 	</form>
 </body>
 </html>

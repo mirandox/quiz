@@ -1,4 +1,5 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,32 +12,27 @@
 		crossorigin="anonymous"
 	>
 </head>
-<body>
-	<table class="table">
+<body class="container"><br>
+	<h2 class="text-center">Ranking de Jogadores</h2><br>
+	<table class="table table-bordered">
 	  <thead class="thead-dark">
-	    <tr>
-	      <th scope="col">#</th>
+	    <tr class="text-center">
 	      <th scope="col">Jogador</th>
 	      <th scope="col">Pontuação</th>
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <tr>
-	      <th scope="row">1</th>
-	      <td>Felipe Miranda da Silva</td>
-	      <td>2000</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">2</th>
-	      <td>Gabriel Dorneles Pereira da Silva</td>
-	      <td>1750</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">3</th>
-	      <td>Leonardo Felipe Pacher</td>
-	      <td>1400</td>
-	    </tr>
+	  
+	  <c:forEach var="jogador" items="${ listaRanking }">
+	  
+		    <tr class="text-center">
+		      <td><c:out value="${ jogador.nomeJogador }"/></td>
+		      <td><c:out value="${ jogador.pontuacao }"/></td>
+		    </tr>
+	    
+	    </c:forEach>
 	  </tbody>
 	</table>
+	<a href="/quiz/index.jsp" class="btn btn-primary btn-lg btn-block">Voltar ao Início</a>
 </body>
 </html>

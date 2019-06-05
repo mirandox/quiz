@@ -1,6 +1,6 @@
 package br.com.uninove.quiz.modelo;
 
-public class Jogador {
+public class Jogador extends Pessoa{
 
 	private int codigoJogador;
 	private String nomeJogador;
